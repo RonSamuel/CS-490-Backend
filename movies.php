@@ -1,16 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "1234";
-$db = "sakila";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include ('databaseInfo.php');
+/**
+ * @var databaseInfo $conn
+ */
 
 $sql = "SELECT film.title, actor.first_name, actor.last_name, category.name from film join film_actor on film_actor.film_id=film.film_id join actor on actor.actor_id=film_actor.actor_id join film_category on film_category.film_id=film.film_id join category on category.category_id=film_category.category_id";
 $result = mysqli_query($conn, $sql);
@@ -76,6 +68,7 @@ while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through re
 echo '
 </table>
 <script>
+//w3schools inspired
 function myFunction() {
   var input, filter, table, tr, td, i, j, txtValue;
   input = document.getElementById("myInput");
