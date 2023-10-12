@@ -1,16 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "1234";
-$db = "sakila";
+include ('databaseInfo.php');
+/**
+ * @var databaseInfo $conn
+ */
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 $a = $_POST["userID1"];
 $sql = "SELECT film.title,film.film_id,film.release_year, film.rental_duration, film.rental_rate, film.length from film where film.film_id='$a'";
 $result = mysqli_query($conn, $sql);
