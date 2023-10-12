@@ -5,6 +5,15 @@ include ('databaseInfo.php');
  */
 
 $a = $_POST["userID1"];
+if($a > 599){
+    echo "<script>
+            alert('No address or rental info; please use the search feature instead.');
+            setTimeout(function(){
+                window.location.href='customers.html';
+            }, 100);
+          </script>";
+    exit;
+}
 $sql = "SELECT customer.first_name, customer.last_name, customer.customer_id, customer.email, address.address, film.title from customer join address on customer.address_id=address.address_id join rental on rental.customer_id=customer.customer_id join inventory on inventory.inventory_id=rental.inventory_id join film on film.film_id=inventory.inventory_id where customer.customer_id='$a'";
 $result = mysqli_query($conn, $sql);
 
